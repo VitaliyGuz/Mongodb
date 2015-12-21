@@ -30,7 +30,8 @@ function *saveBook(){
         this.body = response;
         this.status = 201;
     }catch (_error){
-        this.body = error;
+        this.body = _error.message;
+        this.status = _error.status || 500;
     };
 };
 
@@ -38,7 +39,8 @@ function *deleteBook(id){
     try{
         this.body = yield book.findByIdAndRemove(id);
     }catch (_error){
-        this.body = error;
+        this.body = _error.message;
+        this.status = _error.status || 500;
     };
 };
 
@@ -46,7 +48,8 @@ function *getBooks(){
     try{
         this.body = yield book.find();
     }catch (_error){
-        this.body = error;
+        this.body = _error.message;
+        this.status = _error.status || 500;
     };
 };
 
@@ -54,7 +57,8 @@ function *getBook(id){
     try{
         this.body = yield book.findById(id);
     }catch (_error){
-        this.body = error;
+        this.body = _error.message;
+        this.status = _error.status || 500;
     };
 };
 
