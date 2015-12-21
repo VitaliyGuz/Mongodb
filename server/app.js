@@ -1,7 +1,7 @@
 /**
  * Created by Vitaliy on 11.12.2015.
  */
-
+'use strict';
 var koa = require("koa");
 var route = require("koa-route");
 var parse = require("co-body");
@@ -9,7 +9,7 @@ var url = 'mongodb://localhost:27017/test';
 var mongoose = require('mongoose');
 mongoose.connect(url);
 
-var app = koa();
+var app = module.exports = koa();
 app.use(route.post("/books", saveBook));
 app.use(route.get("/books", getBooks));
 app.use(route.get("/books/:id", getBook));
@@ -31,7 +31,7 @@ function *saveBook(){
         this.status = 201;
     }catch (_error){
         this.body = _error.message;
-        this.status = _error.code;
+        this.status = _error.code || 500;
     };
 };
 
@@ -40,7 +40,7 @@ function *deleteBook(id){
         this.body = yield book.findByIdAndRemove(id);
     }catch (_error){
         this.body = _error.message;
-        this.status = _error.code;
+        this.status = _error.code || 500;
     };
 };
 
@@ -49,7 +49,7 @@ function *getBooks(){
         this.body = yield book.find();
     }catch (_error){
         this.body = _error.message;
-        this.status = _error.code;
+        this.status = _error.code || 500;
     };
 };
 
@@ -58,7 +58,7 @@ function *getBook(id){
         this.body = yield book.findById(id);
     }catch (_error){
         this.body = _error.message;
-        this.status = _error.code;
+        this.status = _error.code || 500;
     };
 };
 

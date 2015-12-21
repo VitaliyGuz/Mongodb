@@ -7,13 +7,18 @@
     "co-body": "^4.0.0",
     "koa": "^1.1.2",
     "koa-route": "^2.4.2",
+    "mocha": "^2.3.4",
     "mongodb": "^2.1.1",
-    "mongoose": "^4.3.1"
+    "mongoose": "^4.3.1",
+    "supertest": "^0.15.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "supertest": "^0.15.0",
+    "mocha": "^2.1.0"
+  },
   "scripts": {
     "start": "node --harmony server/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --harmony"
   },
   "keywords": [],
   "author": "",
